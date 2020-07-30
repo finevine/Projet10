@@ -1,5 +1,7 @@
 # Specific files #
 ##################
+data.json
+latest.dump
 node_modules/
 products/management/commands/categories.json
 products/tests/mock_off_real.json
