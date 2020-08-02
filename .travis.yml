@@ -6,5 +6,6 @@ install:
   - pip install pipenv
   - pipenv install
 # command to run tests
+env: DJANGO_SETTINGS_MODULE=purbeurre_project.settings.travis
 script:
   - python manage.py test
