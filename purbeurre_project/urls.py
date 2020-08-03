@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
+from django.urls import path
+
+def trigger_error(request):
+    division_by_zero = 1 / 0
 
 urlpatterns = [
     path('', include('pages.urls', namespace="pages")),
@@ -24,4 +28,5 @@ urlpatterns = [
     path('account/', include('django.contrib.auth.urls')),
     path('account/', include('account.urls', namespace="account")),
     path('account/profile/', auth_views.LoginView.as_view(template_name='account/index.html', extra_context={'title': 'Ahoy!', 'headerImg': 'header_contact.jpg'}), name='profile'),
+    path('sentry-debug/', trigger_error),
 ]
