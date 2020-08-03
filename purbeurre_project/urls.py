@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
-from django.urls import path
+
 
 def trigger_error(request):
     division_by_zero = 1 / 0
+
 
 urlpatterns = [
     path('', include('pages.urls', namespace="pages")),
