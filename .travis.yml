@@ -19,7 +19,7 @@ before_deploy:
 - ssh-add /tmp/deploy_rsa
 deploy:
   provider: script
-  script: ssh -i /tmp/deploy_rsa $USERNAME@$HOSTNAME "cd purbeurre; git pull origin master"
+  script: ssh -i /tmp/deploy_rsa $USERNAME@$HOSTNAME "cd purbeurre; git pull"
 addons:
   ssh_known_hosts: 46.101.143.60
   #$HOSTNAME
