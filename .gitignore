@@ -4,7 +4,6 @@ data.json
 latest.dump
 node_modules/
 products/management/commands/categories.json
-purbeurre_project/settings/production.py
 purbeurre_project/staticfiles/
 # products/tests/mock_off_real.json
 

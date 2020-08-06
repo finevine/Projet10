@@ -19,7 +19,7 @@ before_deploy:
 - ssh-add /tmp/deploy_rsa
 deploy:
   provider: script
-  script: ssh -i /tmp/deploy_rsa $USERNAME@$HOSTNAME "cd purbeurre; git pull"
+  script: ssh -i /tmp/deploy_rsa $USERNAME@$HOSTNAME "cd ~/purbeurre/ && pipenv shell && git checkout master && git pull && python manage.py collectstatic --noinput && python manage.py makemigrations && python manage.py migrate && python manage.py check --deploy && sudo service nginx reload && exit"
 addons:
   ssh_known_hosts: 46.101.143.60
   #$HOSTNAME
