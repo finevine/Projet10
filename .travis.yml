@@ -1,12 +1,6 @@
 language: python
 python:
 - '3.8'
-before_install:
-- openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv
-  -in deploy_rsa.enc -out deploy_rsa -d
-- eval "$(ssh-agent -s)"
-- chmod 600 /tmp/deploy_rsa
-- ssh-add /tmp/deploy_rsa
 install:
 - pip install pipenv
 - pipenv install
@@ -18,9 +12,13 @@ env:
   - secure: lYzwhyJPFcMk9G5kDoYWAJDx2pSYlNZ0Ecxjj7/DwUGRhP9RfsgdPY7ZYhoBHcbMVvr+ZucExebOlabESw4f71m1574BW6LrxKBCfwlu+sokL3d3olkHFYYkN6ac8clNm63I11rs1mXdHXzkp06h4wYAkP2k2hdextqo+RaO4UBaBCMBNOZpUEuRbAZ77C/N4/5SxUYc4HyEXoU7MsMmnfPrJ3yg35R9oaHaQAIt+vXPzzxn7uP2JV61HP5bJ4uKHwTww60ecXD2E6ssypMAwxfWw5aXCtMLQnYSk8cuC7QvwdfBvE20OGy35a2KO15ZLfA130M4W/UN1OlLjwe/vunp6vR8ULipD6nuW8u5Osed1Wap+x8E0fH/dzHgEDF6jmucwzEIym3uMJZQlgEofdnt8jQaSjyv1Jj7oQ0fAW4rGpsJ1n9WwSTRGlD3asv3MqccB/9S5fNND6U78lrLzREgeKLr1rQ2aj3G/SwmpEhiSDaaO4pD/UqAM4UXnp9Uo4oiXkJ43mQBwUXVpYRNwJwYnTdSxIcN5FU8Rr4CB3e0VZPOh2bTRan4cxe/EA+ueEpd0FzM5T1H+rtppoNnv4HpWTihJDlqZ5fFd41klt/o7+VMTWE9bCiYEnVgecEXnXF9hC7inGIbxgSKm2jB/u0pAM8BFyfYHVYjrGvum7I=
 script:
 - python manage.py test
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/deploy_rsa
+- ssh-add /tmp/deploy_rsa
 deploy:
   provider: script
-  script: ssh -i /tmp/deploy_rsa $USERNAME@$HOSTNAME "cd <repo-directory>; git pull
-    origin master"
+  script: ssh -i /tmp/deploy_rsa $USERNAME@$HOSTNAME "cd purbeurre; git pull origin master"
 addons:
   ssh_known_hosts: $HOSTNAME
