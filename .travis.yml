@@ -3,7 +3,7 @@ python:
 - '3.8'
 install:
 - pip install pipenv
-- pipenv shell
+- pipenv install
 env:
   matrix:
   - DJANGO_SETTINGS_MODULE=purbeurre_project.settings.travis
