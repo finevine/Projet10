@@ -11,7 +11,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DATABASES = {
     'default': {
-        'NAME': os.environ.get('DB_NAME', 'db.sqlite'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', ''),
         'USER': os.environ.get('DB_USER', ''),
         'PASSWORD': os.environ.get('DB_PASSWORD', ''),
         'HOST': 'localhost',
