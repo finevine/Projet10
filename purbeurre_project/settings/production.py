@@ -1,6 +1,6 @@
 import sentry_sdk
 import os
-from . import base
+from .base import *
 from sentry_sdk.integrations.django import DjangoIntegration
 
 DEBUG = False
