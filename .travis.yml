@@ -20,7 +20,7 @@ before_deploy:
 deploy:
   provider: script
   skip_cleanup: true
-  script: ssh -i /tmp/deploy_rsa $USERNAME@$HOSTNAME "cd ~/purbeurre/ && git checkout master && git pull origin master && export DJANGO_SETTINGS_MODULE=purbeurre_project.settings.production && pipenv run python manage.py collectstatic --noinput && pipenv run python manage.py makemigrations && pipenv run python manage.py migrate && pipenv run python manage.py check --deploy && sudo service nginx reload && exit"
+  script: ssh -i /tmp/deploy_rsa $USERNAME@$HOSTNAME "cd ~/purbeurre/ && git checkout master && git pull origin master && export DJANGO_SETTINGS_MODULE=purbeurre_project.settings.travis && pipenv run python manage.py collectstatic --noinput && pipenv run python manage.py makemigrations && pipenv run python manage.py migrate && pipenv run python manage.py check --deploy && sudo service nginx reload && exit"
 addons:
   ssh_known_hosts: 46.101.143.60
   #$HOSTNAME
